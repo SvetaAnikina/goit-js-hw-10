@@ -13,11 +13,15 @@ const refs = {
 refs.inputEl.addEventListener('input', debounce(onClick, DEBOUNCE_DELAY));
 
 function onClick(e) {
-  refs.countryListEl.innerHTML = '';
-  refs.countryInfoEl.innerHTML = '';
-  fetchCountries(e.target.value.trim()).then(countries =>
-    renderCountriesList(countries)
-  );
+    refs.countryListEl.innerHTML = '';
+    refs.countryInfoEl.innerHTML = '';
+    if (e.target.value !== "") {
+         
+        fetchCountries(e.target.value.trim()).then(countries => {
+            renderCountriesList(countries)
+        }
+        );
+    }
 }
 function renderCountriesList(countries) {
   if (countries.length > 10) {
